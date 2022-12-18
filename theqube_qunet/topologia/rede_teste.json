@@ -1,0 +1,50 @@
+{
+    "nó": {
+        "A": {
+            "num_qubits": 2,
+            "tipo": "supercondutor",
+            "processador": true,
+            "detector": true,
+            "ruído": []
+        },
+        "B": {
+            "num_qubits": 1,
+            "tipo": "supercondutor",
+            "processador": true,
+            "detector": true,
+            "ruído": []
+        },
+        "C": {
+            "num_qubits": 7,
+            "tipo": "supercondutor",
+            "processador": true,
+            "detector": true,
+            "ruído": []
+        }
+    },
+    "canal": {
+        "clássico": {
+            "A": {
+                "B": {
+                    "comprimento": 1000,
+                    "tipo": "fibra",
+                    "ruído": []
+                },
+                "C": {
+                    "comprimento": 1500,
+                    "tipo": "fibra",
+                    "ruído": []
+                }
+            }
+        },
+        "quântico": {
+            "A": {
+                "B": {
+                    "comprimento": 1000,
+                    "tipo": "fibra",
+                    "ruído": []
+                }
+            }
+        }
+    }
+}
