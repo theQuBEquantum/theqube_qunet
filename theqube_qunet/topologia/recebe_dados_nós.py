@@ -1,4 +1,5 @@
 from recebe_novo_nó import recebe_novo_nó
+# TODO: Função desnecessária... excluir
 
 
 def recebe_dados_nós(número_nós):
@@ -14,7 +15,7 @@ def recebe_dados_nós(número_nós):
     """
     nós_rede = dict()
     while número_nós:
-        nós_rede.update(recebe_novo_nó())
+        nós_rede.update(recebe_novo_nó(nós_rede))
         número_nós -= 1
     print(nós_rede)
     return nós_rede

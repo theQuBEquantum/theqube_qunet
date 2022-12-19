@@ -62,42 +62,5 @@ class Canal(object):
         self.nó1.adicionar_canal(self)
         self.nó2.adicionar_canal(self)
 
-    def checa_canal_ocupado(self):
-        """
-        Verifica se o canal está ocupado.
 
-        Parâmetros:
-            não recebe parâmetros
 
-        Retorno:
-            bool:
-                True, se o canal estiver ocupado
-                False, se o canal estiver livre
-        """
-        if self.ocupado:
-            return True
-        return False
-
-    def tornar_canal_ocupado(self):
-        """
-        Torna o canal ocupado.
-
-        Parâmetros:
-            não recebe parâmetros
-
-        Retorno:
-            não retorna nada
-        """
-        self.ocupado = True
-
-    def liberar_canal(self):
-        """
-        Torna o canal livre.
-
-        Parâmetros:
-            não recebe parâmetros
-
-        Retorno:
-            não retorna nada
-        """
-        self.ocupado = False

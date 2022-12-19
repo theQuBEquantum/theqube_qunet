@@ -3,7 +3,7 @@ import os.path
 
 i = 0
 arquivo = 'dados.json'
-if os.path.exists(arquivo):
+while os.path.exists(arquivo):
     i += 1
     arquivo = 'dados' + str(i) + '.json'
 

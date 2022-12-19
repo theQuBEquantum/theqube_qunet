@@ -13,7 +13,7 @@ class Nó(object):
         canais (list): lista de canais aos quais o nó está conectado
         nó_final (bool): indica se o nó é final (end-node)
     """
-    # TODO: Usar ABC?
+
     def __init__(self,
                  identificador,
                  num_qubits=0,
@@ -50,7 +50,6 @@ class Nó(object):
         self.nó_final = nó_final
 
     def adicionar_canal(self, canal):
-        # TODO: Raise erro?
         """
         Adiciona um canal à lista de canais do nó.
 
@@ -60,10 +59,14 @@ class Nó(object):
         Retorno:
             não retorna nada
         """
-        if canal not in self.canais:
-            self.canais.append(canal)
+        if canal in self.canais:
+            raise SyntaxError(f'Canal já está conectado ao nó {self.identificador}')
         else:
-            print(f'Canal já está conectado ao nó {self.identificador}')
+            self.canais.append(canal)
+        # if canal not in self.canais:
+        #     self.canais.append(canal)
+        # else:
+        #     print(f'Canal já está conectado ao nó {self.identificador}')
 
     def listar_conexões(self):
         """
@@ -75,12 +78,15 @@ class Nó(object):
         Retorno:
             não retorna nada
         """
+        conexões = '\n*-----------------------------*\nNó ' + self.identificador
         print(f'O nó {self.identificador} possui conexões com os seguintes nós:')
         for canal in self.canais:
+            conexões += '\n ' + canal.nó2.identificador + canal.identificador
             if canal.nó1 == self:
                 print(f'{canal.nó2.identificador} pelo canal {canal.identificador}')
             elif canal.nó2 == self:
                 print(f'{canal.nó1.identificador} pelo canal {canal.identificador}')
+        return conexões
 
     def listar_canais(self):
         """

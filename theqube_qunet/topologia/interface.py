@@ -1,17 +1,19 @@
 import PySimpleGUI as sg
 
 from exportar_arquivo import exportar_arquivo
+from recebe_nome_rede import recebe_nome_rede
 from recebe_novo_canal import recebe_novo_canal
 from recebe_novo_nó import recebe_novo_nó
 from topologia import Topologia
 
+sg.theme('DarkBrown1')
 rede = dict()
 nós = rede['nó'] = dict()
 canais = rede['canal'] = dict()
 canais_clássicos = canais['clássico'] = dict()
 canais_quânticos = canais['quântico'] = dict()
-altura = 400
-largura = 120
+altura = 600
+largura = 250
 identificação_canais_quânticos = list()
 identificação_canais_clássicos = list()
 
@@ -36,19 +38,21 @@ col4 = sg.Column([[sg.Frame('Ações:',
                                           sg.Button('Salvar'),
                                           sg.Button('Sair')]],
                                         size=(largura * 3 + 60, 45), pad=(0, 0))]])]], pad=(0, 0))
-sg.Text()
 layout = [[sg.T('QuNET', font='_ 18')],
           [col1, col2, col3],
           [col4]]
 
-janela = sg.Window('QuNET', layout, finalize=True)
-
+janela = sg.Window('QuNET', layout, finalize=True, return_keyboard_events=True)
 while True:
     evento, valores = janela.read()
+    print(f"Evento: {evento}")
     if evento in (sg.WIN_CLOSED, 'Sair'):
         break
     elif evento == 'Novo nó':
-        novo_nó = recebe_novo_nó()
+        # TODO: Inserir opção de criação de repetidor
+        novo_nó = recebe_novo_nó(nós)
+        if novo_nó is None:
+            continue
         nós.update(novo_nó)
         janela['-LISTA-NÓS-'].update(nós)
         continue
@@ -56,7 +60,13 @@ while True:
         novo_canal = recebe_novo_canal(nós)
         if novo_canal == (None, None, None):
             continue
-        nó1 = list(novo_canal[0].keys())[0]  # TODO: Melhorar (possivelmente colocar no retorno de novo_canal())
+        if novo_canal[1] == 'quântico' and novo_canal[2] in identificação_canais_quânticos:
+            sg.popup(f'O canal {novo_canal[2]} já existe!')
+            continue
+        if novo_canal[1] == 'clássico' and novo_canal[2] in identificação_canais_clássicos:
+            sg.popup(f'O canal {novo_canal[2]} já existe!')
+            continue
+        nó1 = list(novo_canal[0].keys())[0]
         if novo_canal[1] == 'quântico':
             if canais_quânticos and nó1 in canais_quânticos:
                 canais_quânticos[nó1].update(novo_canal[0][nó1])
@@ -70,11 +80,12 @@ while True:
             else:
                 canais_clássicos.update(novo_canal[0])
             identificação_canais_clássicos.append(novo_canal[2])
-            janela['-LISTA-CANAIS-QUÂNTICOS-'].update(identificação_canais_clássicos)
+            janela['-LISTA-CANAIS-CLÁSSICOS-'].update(identificação_canais_clássicos)
         continue
     elif evento == 'Simular':
-        rede_teste = Topologia('rede_teste', rede)
-        rede_teste.descrever_rede()  # TODO: Imprimir saída em tela da GUI
+        rede_teste = Topologia(recebe_nome_rede(), rede)
+        rede_teste.descrever_rede()
+        rede_teste.descrever_rede_interface()
         break
     elif evento == 'Salvar':
         exportar_arquivo(rede)
