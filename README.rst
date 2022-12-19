@@ -16,22 +16,16 @@ TheQuBE QuNET
 
 
 
-Python Boilerplate contains all the boilerplate you need to create a Python package.
-
+TheQuBE QuNET é um pacote Python com o intuito de realizar simulação de redes quânticas
 
 * Free software: MIT license
 * Documentation: https://theqube-qunet.readthedocs.io.
 
 
-Features
---------
 
 * TODO
 
-Credits
+Créditos
 -------
 
-This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
-
-.. _Cookiecutter: https://github.com/audreyr/cookiecutter
-.. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
+TheQuBE

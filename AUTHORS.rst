@@ -5,9 +5,10 @@ Credits
 Development Lead
 ----------------
 
-* José Junior <jljuniorpb@gmail.com>
+* Eduardo Maschio <eduardo.maschio@theqube.io>
+
 
 Contributors
 ------------
 
-None yet. Why not be the first?
+* José Junior <jljuniorpb@gmail.com>
