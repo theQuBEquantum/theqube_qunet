@@ -32,13 +32,15 @@ class Topologia(object):
     def criar_nós(self, identificação):
         """
         Chama a função criar_nó() para cada nó identificado nos dados da rede.
-        
+
         Parâmetros:
             identificação (dict): dados dos nós que compõem a rede
 
         Retorno:
             não retorna nada
         """
+        print(identificação)
+        print(self.nós)
         for nó in identificação:
             self.nós.append(self.criar_nó(nó, identificação[nó]))
 
@@ -76,9 +78,9 @@ class Topologia(object):
     def criar_canais(self, nó1, nós2, tipo):
         """
         Inicializa e configura os canais de um determinado nó.
-        
+
         Parâmetros:
-            nó1 (str): identificador do nó principal 
+            nó1 (str): identificador do nó principal
             nós2 (dict): dados dos nós a serem conectados a nó1 e as configurações do canal a ser criado
             tipo (str): indica se o canal é clássico ou quântico
 
@@ -165,7 +167,7 @@ class Topologia(object):
         layout = [[sg.T(f'REDE {self.nome}\n*-----------------------------------------------------------------------'
                         '--------------------------------------*\n')],
                   [sg.Text(f'Nós: {self.listar_nós()}')],
-                  [sg.Text(f'Conexões: {self.listar_conexões()}')],
+                  [sg.Text(f'Conexões: {self.listar_conexões()}')],  # TODO: Corrigir
                   [sg.Button('Ok')]]
         janela = sg.Window('Topologia criada com sucesso!', layout)
         while True:
@@ -208,5 +210,6 @@ class Topologia(object):
         lista_nós = ''
         for nó in self.nós:
             print(nó.identificador)
-            lista_nós += '\n' + nó.identificador
+            lista_nós += '\n' + nó.identificador + ' ' + str(nó.num_qubits) + ' ' + nó.tipo +\
+                         ' ' + str(nó.processador) + ' ' + str(nó.detector) + ' ' + str(nó.ruído)
         return lista_nós

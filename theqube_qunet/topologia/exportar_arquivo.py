@@ -9,5 +9,8 @@ while os.path.exists(arquivo):
 
 
 def exportar_arquivo(dicionario):
+    """
+    Exporta um arquivo json a partir de um dicionário.
+    """
     with open(arquivo, 'w', encoding='utf-8') as json_file:
         json.dump(dicionario, json_file, ensure_ascii=False)

@@ -84,8 +84,8 @@ while True:
         continue
     elif evento == 'Simular':
         rede_teste = Topologia(recebe_nome_rede(), rede)
-        rede_teste.descrever_rede()
         rede_teste.descrever_rede_interface()
+        print(rede)
         break
     elif evento == 'Salvar':
         exportar_arquivo(rede)
